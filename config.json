@@ -1,5 +1,4 @@
 {
-  "source": "http://localhost:3000",
   "target": "https://rsf.org/",
   "port": 3000,
   "log_path": "app.log",

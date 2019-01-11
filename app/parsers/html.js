@@ -3,19 +3,11 @@ const config = require('../config')
 
 module.exports = () => {
   const regexp = new RegExp(`(https?:)?(/{2})?${config.parsed_target.hostname}`, 'gi')
-  let replacer = [config.parsed_source.protocol, '//', config.parsed_source.hostname]
-
-  if (config.parsed_source.port) {
-    replacer.push(':')
-    replacer.push(config.parsed_source.port)
-  }
-
-  replacer = replacer.join('')
 
   const handlers = [
-    replaceStream(regexp, replacer),
+    replaceStream(regexp, ''),
     replaceStream(/<script\b[^>]*>([\s\S]*?)<\/script>/g, (match) => {
-      return match.split(regexp).join(replacer)
+      return match.split(regexp).join('')
     })
   ]
 
