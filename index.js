@@ -28,6 +28,8 @@ app.use(morgan('tiny', { stream: accessLogStream }))
 
 // Handle http requests
 app.use((req, res, next) => {
+  req._old_headers = Object.assign({}, req.headers)
+
   req.headers['host'] = config.parsed_target.host
   req.headers['origin'] = config.target
 
@@ -36,7 +38,8 @@ app.use((req, res, next) => {
 
 const transforms = {
   'text/html': require('./app/parsers/html'),
-  'application/javascript': require('./app/parsers/javascript')
+  'application/javascript': require('./app/parsers/javascript'),
+  'text/plain': require('./app/parsers/txt')
 }
 
 app.use(require('./app/tool/transform')(transforms))
