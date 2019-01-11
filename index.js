@@ -25,6 +25,9 @@ proxy.on('proxyRes', (proxyRes) => {
     let replaced = location.replace(config.parsed_target.host, replacer.join(''))
     proxyRes.headers['location'] = replaced
   }
+
+  // Allow all CORS domain by default
+  proxyRes.headers['Access-Control-Allow-Origin'] = '*'
 })
 
 // Use morgan as logger
