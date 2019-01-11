@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "run(){ ./node_modules/.bin/eslint . --ext .js -c .eslintrc.json $1 || true; }; run",
+    "lint": "eslint . --ext .js -c .eslintrc.json",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "engines": {
+    "node": ">=8"
+  },
+  "engineStrict" : true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NInfolab/alice.git"
@@ -31,6 +35,11 @@
   },
   "devDependencies": {
     "eslint": "^4.18.2",
-    "nodemon": "^1.11.0"
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "nodemon": "^1.18.9"
   }
 }
