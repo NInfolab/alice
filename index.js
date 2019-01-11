@@ -32,7 +32,8 @@ proxy.on('proxyRes', (proxyRes) => {
 
 // Use morgan as logger
 const accessLogStream = fs.createWriteStream(config.log_path, { flags: 'a' })
-app.use(morgan('combined', { stream: accessLogStream }))
+
+app.use(morgan('tiny', { stream: accessLogStream }))
 
 // Handle http requests
 app.use((req, res, next) => {
