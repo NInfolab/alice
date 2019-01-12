@@ -4,5 +4,8 @@
   "log_path": "app.log",
   "hostnames_to_replace": {
     "services.korben.info": "en.rsf.org"
-  }
+  },
+  "modules": [
+    ["cache", {}]
+  ]
 }

@@ -6,6 +6,7 @@ const http = require('http')
 const fs = require('fs')
 const morgan = require('morgan')
 const config = require('./app/config')
+const modules = require('./modules')
 
 // Basic Connect App
 const app = connect()
@@ -46,6 +47,23 @@ const transforms = {
 
 app.use(require('./app/tool/transform')(transforms))
 
+// Apply modules
+if (config.modules && config.modules.length) {
+  config.modules.forEach((module) => {
+    if (typeof module === 'string' && modules[module]) {
+      app.use(modules[module](config))
+    } else {
+      const moduleName = module[0]
+      const moduleConfig = module[1] || {}
+
+      if (modules[moduleName]) {
+        app.use(modules[moduleName](config, moduleConfig))
+      }
+    }
+  })
+}
+
+// Proxying
 app.use((req, res) => {
   delete req.headers['accept-encoding']
   proxy.web(req, res, { target: config.target })
