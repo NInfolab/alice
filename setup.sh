@@ -1,6 +1,9 @@
 #!/bin/bash
 # Alice install script
 
+# Exit script on error
+set -e
+
 ALICE_PORT=3000
 LOG_DIR=/var/log/alice
 CONF_DIR=/etc/alice
