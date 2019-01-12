@@ -29,6 +29,7 @@
     "connect": "^3.4.1",
     "http-proxy": "^1.13.1",
     "iconv-lite": "^0.4.13",
+    "maxmind": "^2.11.2",
     "morgan": "^1.7.0",
     "multipipe": "^3.0.0",
     "replacestream": "^4.0.0"
@@ -47,7 +48,7 @@
     "init": "none",
     "dependencies": "nodejs",
     "templates": {
-	"postinst": "./setup.sh"
+      "postinst": "./setup.sh"
     },
     "entrypoints": {
       "daemon": "/bin/true"
