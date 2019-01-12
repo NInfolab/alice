@@ -1,7 +1,0 @@
-#!/bin/bash
-
-set -e
-
-export PATH="$PATH:`pwd`/node/bin"
-
-node_modules/.bin/pm2 start index.js --name server
