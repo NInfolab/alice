@@ -143,6 +143,10 @@ basic-auth@~2.0.0:
   dependencies:
     safe-buffer "5.1.2"
 
+big-integer@^1.6.31:
+  version "1.6.40"
+  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.40.tgz#02e4cd4d6e266c4d9ece2469c05cb6439149fc78"
+
 binary-extensions@^1.0.0:
   version "1.8.0"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.8.0.tgz#48ec8d16df4377eae5fa5884682480af4d95c774"
@@ -1313,6 +1317,13 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+maxmind@^2.11.2:
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/maxmind/-/maxmind-2.11.2.tgz#57864a64d031ab92aaaf1ee89e1d534571a7a706"
+  dependencies:
+    big-integer "^1.6.31"
+    tiny-lru "^5.0.3"
+
 micromatch@^3.1.4:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
@@ -1443,6 +1454,10 @@ needle@^2.2.1:
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
+
+node-deb@^0.10.7:
+  version "0.10.7"
+  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.10.7.tgz#8b0c19e7ee0ea72b2d861cd9ea32aec4c231bb9e"
 
 node-pre-gyp@^0.10.0:
   version "0.10.3"
@@ -2187,6 +2202,10 @@ through@^2.3.6:
 timed-out@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
+
+tiny-lru@^5.0.3:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/tiny-lru/-/tiny-lru-5.0.6.tgz#bbbaf554ebf058dcb37955c9dc2d579145c62dee"
 
 tmp@^0.0.33:
   version "0.0.33"
