@@ -18,5 +18,5 @@ cd website-mirror-by-proxy
 npm install
 # Edit the config.json file
 # Then start the server
-node server.js
+node index.js config.json
 ```
