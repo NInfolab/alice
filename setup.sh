@@ -110,7 +110,7 @@ After=alice.service
 
 [Service]
 User=root
-ExecStart=/usr/local/bin/caddy -conf $CONF_DIR/caddy
+ExecStart=/usr/local/bin/caddy -conf $CONF_DIR/caddy -agree
 WorkingDirectory=$SRC_DIR
 Restart=on-failure
 LimitNOFILE=8192
