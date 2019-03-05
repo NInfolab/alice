@@ -15,11 +15,10 @@ const app = connect()
 const proxy = httpProxy.createProxyServer({ secure: false })
 
 // Handle proxy response
+const redirRgx = new RegExp(`(https?:)?(/{2})?${config.parsed_target.host}`, 'gi')
 proxy.on('proxyRes', (proxyRes) => {
   if (proxyRes.statusCode >= 301 && proxyRes.statusCode <= 302) {
-    proxyRes.headers['location'] = proxyRes.headers['location'].replace(
-      config.parsed_target.host, config.parsed_origin.host
-    )
+    proxyRes.headers['location'] = proxyRes.headers['location'].replace(redirRgx, '')
   }
 
   // Allow all CORS domain by default
