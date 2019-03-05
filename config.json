@@ -1,11 +1,11 @@
 {
   "target": "https://korben.info/",
   "port": 3000,
-  "log_path": "app.log",
   "hostnames_to_replace": {
     "services.korben.info": "en.rsf.org"
   },
   "modules": [
+    ["logger", {}],
     ["cache", {}],
     ["metrics", {}]
   ]

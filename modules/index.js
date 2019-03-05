@@ -1,4 +1,5 @@
 module.exports = {
   cache: require('./cache'),
-  metrics: require('./metrics')
+  metrics: require('./metrics'),
+  logger: require('./logger')
 }

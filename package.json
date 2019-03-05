@@ -31,8 +31,9 @@
     "iconv-lite": "^0.4.13",
     "maxmind": "^2.11.2",
     "moment": "^2.23.0",
-    "morgan": "^1.7.0",
     "multipipe": "^3.0.0",
+    "pino": "^5.11.1",
+    "pino-http": "^4.1.0",
     "replacestream": "^4.0.0"
   },
   "devDependencies": {

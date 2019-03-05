@@ -3,8 +3,6 @@
 const httpProxy = require('http-proxy')
 const connect = require('connect')
 const http = require('http')
-const fs = require('fs')
-const morgan = require('morgan')
 const config = require('./app/config')
 const modules = require('./modules')
 
@@ -24,11 +22,6 @@ proxy.on('proxyRes', (proxyRes) => {
   // Allow all CORS domain by default
   proxyRes.headers['Access-Control-Allow-Origin'] = '*'
 })
-
-// Use morgan as logger
-const accessLogStream = fs.createWriteStream(config.log_path, { flags: 'a' })
-
-app.use(morgan('tiny', { stream: accessLogStream }))
 
 // Handle http requests
 app.use((req, res, next) => {
