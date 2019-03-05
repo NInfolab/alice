@@ -17,7 +17,9 @@ const proxy = httpProxy.createProxyServer({ secure: false })
 // Handle proxy response
 proxy.on('proxyRes', (proxyRes) => {
   if (proxyRes.statusCode >= 301 && proxyRes.statusCode <= 302) {
-    proxyRes.headers['location'] = proxyRes.headers['location'].replace(config.parsed_target.host, '')
+    proxyRes.headers['location'] = proxyRes.headers['location'].replace(
+      config.parsed_target.host, config.parsed_origin.host
+    )
   }
 
   // Allow all CORS domain by default
