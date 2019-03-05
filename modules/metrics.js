@@ -5,7 +5,7 @@ const maxmind = require('maxmind')
 const moment = require('moment')
 
 module.exports = (serverConfig, moduleConfig = {}) => {
-  const contryLookup = maxmind.openSync('./geolite2/GeoLite2-Country.mmdb')
+  const contryLookup = maxmind.openSync('./lib/geolite2/GeoLite2-Country.mmdb')
   let users = {}
   let stats = {}
 
