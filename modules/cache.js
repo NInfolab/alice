@@ -1,4 +1,4 @@
-module.exports = (serverConfig, moduleConfig = {}) => {
+module.exports = (proxy, serverConfig, moduleConfig = {}) => {
   return (req, res, next) => {
     return next()
   }

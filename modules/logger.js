@@ -17,10 +17,18 @@ const serializers = {
   }
 }
 
-const logger = pinoHttp({
-  logger: pino(),
+const logger = pino()
+const proxyLogger = logger.child({ type: 'proxy' })
+
+const httpLogger = pinoHttp({
   useLevel: 'info',
+  logger: logger.child({ type: 'http' }),
   serializers
 })
 
-module.exports = () => logger
+module.exports = (proxy) => {
+  // Log proxy error
+  proxy.on('error', proxyLogger.error)
+
+  return httpLogger
+}

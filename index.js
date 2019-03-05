@@ -51,7 +51,7 @@ if (config.modules && config.modules.length) {
       const moduleConfig = module[1] || {}
 
       if (modules[moduleName]) {
-        app.use(modules[moduleName](config, moduleConfig))
+        app.use(modules[moduleName](proxy, config, moduleConfig))
       }
     }
   })
