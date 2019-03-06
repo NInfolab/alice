@@ -28,7 +28,7 @@ const httpLogger = pinoHttp({
 
 module.exports = (proxy) => {
   // Log proxy error
-  proxy.on('error', proxyLogger.error)
+  proxy.on('error', proxyLogger.error.bind(proxyLogger))
 
   return httpLogger
 }
