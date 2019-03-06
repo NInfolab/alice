@@ -3,7 +3,7 @@
 const httpProxy = require('http-proxy')
 const connect = require('connect')
 const http = require('http')
-const config = require('./app/config')
+const config = require('./configLoader')
 const modules = require('./modules')
 
 // Basic Connect App
