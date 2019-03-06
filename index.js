@@ -16,10 +16,9 @@ const proxy = httpProxy.createProxyServer({ secure: false })
 if (config.modules && config.modules.length) {
   config.modules.forEach((module) => {
     if (typeof module === 'string' && modules[module]) {
-      app.use(modules[module](config))
+      app.use(modules[module](proxy, config))
     } else {
-      const moduleName = module[0]
-      const moduleConfig = module[1] || {}
+      const [moduleName, moduleConfig] = module
 
       if (modules[moduleName]) {
         app.use(modules[moduleName](proxy, config, moduleConfig))
