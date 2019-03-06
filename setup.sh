@@ -99,10 +99,18 @@ fi
 # Generate alice configuration
 sudo sh -c "cat > ${CONF_DIR}/alice.json <<- EOM
 {
-  \"source\": \"https://$HOSTNAME\",
   \"target\": \"$TARGET\",
   \"port\": $ALICE_PORT,
-  \"log_path\": \"$LOG_DIR/alice.log\"
+  \"modules\": [
+    [\"logger\", {}],
+    [\"cache\", {}],
+    [\"metrics\", {}],
+    [\"cors\", {}],
+    [\"redirection\", {}],
+    [\"encoding\", {}],
+    [\"transforms\", {}],
+    [\"proxy\", {}]
+  ]
 }
 EOM"
 
