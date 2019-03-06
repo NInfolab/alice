@@ -12,35 +12,6 @@ const app = connect()
 // Initialize reverse proxy
 const proxy = httpProxy.createProxyServer({ secure: false })
 
-// Handle proxy response
-const redirRgx = new RegExp(`(https?:)?(/{2})?${config.parsed_target.host}`, 'gi')
-proxy.on('proxyRes', (proxyRes) => {
-  if (proxyRes.statusCode >= 301 && proxyRes.statusCode <= 302) {
-    proxyRes.headers['location'] = proxyRes.headers['location'].replace(redirRgx, '')
-  }
-
-  // Allow all CORS domain by default
-  proxyRes.headers['Access-Control-Allow-Origin'] = '*'
-})
-
-// Handle http requests
-app.use((req, res, next) => {
-  req._old_headers = Object.assign({}, req.headers)
-
-  req.headers['host'] = config.parsed_target.host
-  req.headers['origin'] = config.target
-
-  next()
-})
-
-const transforms = {
-  'text/html': require('./app/parsers/html'),
-  'application/javascript': require('./app/parsers/javascript'),
-  'text/plain': require('./app/parsers/txt')
-}
-
-app.use(require('./app/tool/transform')(transforms))
-
 // Apply modules
 if (config.modules && config.modules.length) {
   config.modules.forEach((module) => {
@@ -56,12 +27,6 @@ if (config.modules && config.modules.length) {
     }
   })
 }
-
-// Proxying
-app.use((req, res) => {
-  delete req.headers['accept-encoding']
-  proxy.web(req, res, { target: config.target })
-})
 
 // Handle proxy errors
 proxy.on('error', (err, req, res) => {

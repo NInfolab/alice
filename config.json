@@ -1,12 +1,17 @@
 {
-  "target": "https://korben.info/",
+  "target": "https://rsf.org",
   "port": 3000,
   "hostnames_to_replace": {
-    "services.korben.info": "en.rsf.org"
+    "some.tld": "en.rsf.org"
   },
   "modules": [
     ["logger", {}],
     ["cache", {}],
-    ["metrics", {}]
+    ["metrics", {}],
+    ["cors", {}],
+    ["redirection", {}],
+    ["encoding", {}],
+    ["transforms", {}],
+    ["proxy", {}]
   ]
 }

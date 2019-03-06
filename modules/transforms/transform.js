@@ -4,10 +4,10 @@ const iconv = require('iconv-lite')
 const getCharset = require('charset')
 const zlib = require('zlib')
 
-module.exports = (transformers) => {
+module.exports = (parsers, serverConfig) => {
   return (req, res, next) => {
     const gunzip = zlib.createGunzip()
-    const { writeHead } = res
+    const { writeHead, write, end } = res
 
     res.writeHead = function (code, headers) {
       let contentType = this.getHeader('content-type')
@@ -16,11 +16,11 @@ module.exports = (transformers) => {
       const processors = []
 
       if (typeof contentType !== 'undefined') {
-        for (let k in transformers) {
-          const v = transformers[k]
+        for (let k in parsers) {
+          const v = parsers[k]
 
           if (contentType.indexOf(k) === 0) {
-            processors.push(v(req, res))
+            processors.push(v(serverConfig)(req, res))
           }
         }
       }
@@ -62,6 +62,7 @@ module.exports = (transformers) => {
 
         done(null, data)
       }
+
       processors.unshift(transform)
 
       // Gunzip response if Gziped
@@ -77,25 +78,18 @@ module.exports = (transformers) => {
         }
       }
 
-      const pr = pipe([].concat.apply([], processors))
-      const { write } = res
-      const { end } = res
+      const pr = pipe(...processors)
+
+      res.write = (data, encoding) => pr.write(data, encoding)
+      res.end = pr.end.bind(pr)
 
       pr.on('data', function (buf) {
         write.call(res, buf)
       })
 
-      res.write = function (data, encoding) {
-        pr.write(data, encoding)
-      }
-
       pr.on('end', function () {
         end.call(res)
       })
-
-      res.end = function (data, encoding) {
-        pr.end(data, encoding)
-      }
 
       writeHead.apply(res, arguments)
     }
