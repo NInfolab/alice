@@ -99,7 +99,7 @@ module.exports = (proxy, serverConfig, moduleConfig = {}) => {
     res.writeHead = function (code, headers) {
       const contentType = this.getHeader('content-type')
       // Only count html hit
-      if (!contentType.match('html/*')) {
+      if (!contentType || (contentType && !contentType.match('html/*'))) {
         return writeHead.apply(res, arguments)
       }
 
