@@ -5,6 +5,12 @@ module.exports = (proxy, serverConfig, moduleConfig = {}) => {
   proxy.on('proxyRes', (proxyRes) => {
     if (proxyRes.statusCode >= 301 && proxyRes.statusCode <= 302) {
       proxyRes.headers['location'] = proxyRes.headers['location'].replace(redirRgx, '')
+
+      // Force temporary redirects
+      if (proxyRes.statusCode === 301) {
+        proxyRes.statusCode = 302
+        proxyRes.statusMessage = 'Found'
+      }
     }
   })
 
