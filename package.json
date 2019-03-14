@@ -30,6 +30,7 @@
     "http-proxy": "^1.13.1",
     "iconv-lite": "^0.4.13",
     "maxmind": "^2.11.2",
+    "mkdirp": "^0.5.1",
     "moment": "^2.23.0",
     "multipipe": "^3.0.0",
     "pino": "^5.11.1",

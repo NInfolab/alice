@@ -3,18 +3,19 @@ const fs = require('fs')
 const path = require('path')
 const maxmind = require('maxmind')
 const moment = require('moment')
+const mkdirp = require('mkdirp')
 
 module.exports = (proxy, serverConfig, moduleConfig = {}) => {
   const contryLookup = maxmind.openSync('./lib/geolite2/GeoLite2-Country.mmdb')
   let users = {}
   let stats = {}
 
-  const metricsDir = moduleConfig.path || './metrics'
+  const metricsDir = moduleConfig.path || './tmp/metrics'
   const statsFile = path.resolve(path.join(metricsDir, 'stats.json'))
   const usersFile = path.resolve(path.join(metricsDir, 'users.json'))
 
   if (!fs.existsSync(metricsDir)) {
-    fs.mkdirSync(metricsDir)
+    mkdirp(metricsDir)
   }
   if (fs.existsSync(statsFile)) {
     stats = require(statsFile)
