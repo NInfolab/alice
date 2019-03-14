@@ -1,6 +1,9 @@
 const pino = require('pino')
 const pinoHttp = require('pino-http')
 
+// Is dev env ?
+const isdev = process.env.NODE_ENV === 'development'
+
 // Define custom serializer
 const serializers = {
   req: (req) => {
@@ -17,7 +20,7 @@ const serializers = {
   }
 }
 
-const logger = pino()
+const logger = pino({ prettyPrint: isdev })
 const proxyLogger = logger.child({ type: 'proxy' })
 
 const httpLogger = pinoHttp({

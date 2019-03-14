@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js -c .eslintrc.json",
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "pkg": "node-deb -- ./"
   },
   "engines": {
@@ -34,6 +34,7 @@
     "multipipe": "^3.0.0",
     "pino": "^5.11.1",
     "pino-http": "^4.1.0",
+    "pino-pretty": "^2.5.0",
     "replacestream": "^4.0.0"
   },
   "devDependencies": {
