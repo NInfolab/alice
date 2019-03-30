@@ -6,12 +6,12 @@
   },
   "modules": [
     ["logger", {}],
-    ["cache", {}],
     ["metrics", {}],
     ["cors", {}],
     ["redirection", {}],
     ["encoding", {}],
     ["transforms", {}],
+    ["cache", {}],
     ["proxy", {}]
   ]
 }

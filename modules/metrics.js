@@ -15,8 +15,9 @@ module.exports = (proxy, serverConfig, moduleConfig = {}) => {
   const usersFile = path.resolve(path.join(metricsDir, 'users.json'))
 
   if (!fs.existsSync(metricsDir)) {
-    mkdirp(metricsDir)
+    mkdirp.sync(metricsDir)
   }
+
   if (fs.existsSync(statsFile)) {
     stats = require(statsFile)
     // Crash if users file have been deleted and not stats
