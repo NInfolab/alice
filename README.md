@@ -16,8 +16,8 @@
 
 ```sh
 # Clone the git repository from Github.
-git clone https://github.com/NInfolab/website-mirror-by-proxy.git
-cd website-mirror-by-proxy
+git clone https://github.com/NInfolab/alice.git
+cd alice
 # Install dependencies
 npm install
 # Edit the config.json file
