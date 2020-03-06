@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/NInfolab/alice.svg?branch=master)](https://travis-ci.org/NInfolab/alice)
 
+## See our Roadmap below
+
+[Roadmap](https://github.com/NInfolab/alice/edit/master/roadmap.md)
+
 ## Documentation
 
 [Docs on github pages](http://ninfolab.github.io/alice/)
