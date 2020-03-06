@@ -4,7 +4,7 @@
 
 ## See our Roadmap below
 
-[Roadmap](https://github.com/NInfolab/alice/master/roadmap.md)
+[Roadmap](https://github.com/NInfolab/alice/blob/master/roadmap.md)
 
 ## Documentation
 
