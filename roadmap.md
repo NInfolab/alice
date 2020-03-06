@@ -1,6 +1,8 @@
 Roadmap - 06/03/2020
 ==========================
 
+=> [Milestone](https://github.com/NInfolab/alice/milestone/1)
+
 TODO during March 2020 Hackathon
 
 - Add a LICENSE & CONTRIBUTING.md
