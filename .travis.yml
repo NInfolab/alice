@@ -8,5 +8,5 @@ stages:
 jobs:
   include:
     - stage: lint
-      install: yarn install
-      script: yarn lint
+      install: npm install
+      script: npm run lint
