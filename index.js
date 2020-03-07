@@ -30,3 +30,7 @@ if (config.modules && config.modules.length) {
 http.createServer(app).listen(config.port, () => {
   console.log(`Server listen on http://127.0.0.1:${config.port}`)
 })
+
+// Local Variables:
+// mode: js2
+// End:
