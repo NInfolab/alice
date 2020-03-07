@@ -4,9 +4,13 @@ cache: yarn
 
 stages:
   - lint
+  - test
 
 jobs:
   include:
     - stage: lint
       install: npm install
       script: npm run lint
+    - stage: test
+      install: npm install
+      script: npm run test

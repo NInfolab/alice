@@ -4,7 +4,7 @@
   "description": "Node.js web proxy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "lint": "eslint . --ext .js -c .eslintrc.json",
     "start": "node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
@@ -45,6 +45,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "jasmine": "^3.5.0",
     "node-deb": "^0.10.7",
     "nodemon": "^1.18.9"
   },
