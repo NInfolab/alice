@@ -79,7 +79,7 @@ module.exports = (proxy, serverConfig, moduleConfig = {}) => {
             d.setUTCMonth(m - 1)
             d.setUTCFullYear(y)
             bodyMonth += `<h2>${moment(d).format('MMMM YYYY')}</h2>
-              <p><b>Unique visitors:</b> ${s.users}<br /><b>Hits:</b> ${s.users}</p>
+              <p><b>Unique visitors:</b> ${s.users}<br /><b>Hits:</b> ${s.hits}</p>
               <div style="display: flex; justify-content: space-around">
                 <table style="width: 40%; ${style}">${countries}</table>
                 <table style="width: 40%; ${style}">${continents}</table>
