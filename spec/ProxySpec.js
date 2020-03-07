@@ -63,4 +63,18 @@ describe('alice\'s proxy', () => {
 
     expect(response.statusCode).toBe(404)
   })
+
+  it('responds with 521 if target won\'t accept the connection', async () => {
+    const proxy = await startProxy('http://localhost:9987')
+    const response = await get(proxy)
+
+    expect(response.statusCode).toBe(521)
+  })
+
+  it('responds with 521 if target doesn\'t exist', async () => {
+    const proxy = await startProxy('http://alice-le-clown-n-existe-pas.fr')
+    const response = await get(proxy)
+
+    expect(response.statusCode).toBe(521)
+  })
 })

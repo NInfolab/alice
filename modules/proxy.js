@@ -1,11 +1,23 @@
 module.exports = (proxy, serverConfig, moduleConfig = {}) => {
-  // Handle proxy errors
   proxy.on('error', (err, req, res) => {
-    // @TODO: handle errors, display info for user
-    console.error(err)
+    switch (err.errno) {
+      case 'ENOTFOUND':
+      case 'ECONNREFUSED':
+        // 521: web server is down
+        res.writeHead(521, { 'Content-Type': 'text/plain' })
+        res.end('The target server seems to be down. Please try again later.')
+        break
+      default:
+        let message = `We are sorry, but we cannot serve this request:\n\n`
 
-    res.writeHead(500, { 'Content-Type': 'text/plain' })
-    res.end('We are sorry, but we cannot serve this request.')
+        for (let key of Object.keys(err)) {
+          message += `${key}: ${err[key]}\n`
+        }
+
+        res.writeHead(500, { 'Content-Type': 'text/plain' })
+
+        res.end(message)
+    }
   })
 
   return (req, res) => {
