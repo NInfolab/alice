@@ -11,7 +11,7 @@
     "pkg": "node-deb -- ./"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
   "engineStrict": true,
   "repository": {
