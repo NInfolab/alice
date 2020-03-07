@@ -119,7 +119,7 @@ sudo sh -c "cat > ${CONF_DIR}/caddy <<- EOM
 $HOSTNAME {
   gzip
   cache
-  log $LOG_DIR/caddy.log
+  log $LOG_DIR/caddy.log { ipmask 255.255.0.0 ffff:ffff:ffff:ff00:: }
   tls $EMAIL
   proxy / 127.0.0.1:$ALICE_PORT {
     transparent
