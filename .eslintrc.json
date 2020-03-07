@@ -1,7 +1,11 @@
 {
-  "extends": "standard",
+  "extends": [
+    "standard",
+    "plugin:jasmine/recommended"
+  ],
+  "plugins": ["jasmine"],
   "env": {
-	"node": true,
-	"jasmine": true
+    "node": true,
+    "jasmine": true
   }
 }
