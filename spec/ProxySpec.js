@@ -19,7 +19,7 @@ const startServer = (server) => {
 const startProxy = (target) => {
   const proxy = alice.createProxy({
     target,
-    modules: ['proxy'],
+    modules: [['proxy', { timeout: 500 }]],
     'parsed_target': new URL(target)
   })
 
@@ -73,6 +73,19 @@ describe('alice\'s proxy', () => {
 
   it('responds with 521 if target doesn\'t exist', async () => {
     const proxy = await startProxy('http://alice-le-clown-n-existe-pas.fr')
+    const response = await get(proxy)
+
+    expect(response.statusCode).toBe(521)
+  })
+
+  it('responds with 521 if target never answers', async () => {
+    const targetServer = await startTargetServer()
+
+    targetServer.on('request', (req, res) => {
+      // never answers
+    })
+
+    const proxy = await startProxy(`http://localhost:${targetServer.address().port}`)
     const response = await get(proxy)
 
     expect(response.statusCode).toBe(521)

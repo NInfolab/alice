@@ -1,4 +1,13 @@
 module.exports = (proxy, serverConfig, moduleConfig = {}) => {
+  const timeout = moduleConfig.timeout || 60000 // 60s by default
+
+  proxy.on('proxyReq', (proxyReq, req, res, options) => {
+    setTimeout(() => {
+      res.writeHead(521, { 'Content-Type': 'text/plain' })
+      res.end(`The target server didn't answer within ${timeout} milliseconds.`)
+    }, timeout)
+  })
+
   proxy.on('error', (err, req, res) => {
     switch (err.errno) {
       case 'ENOTFOUND':
