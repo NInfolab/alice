@@ -69,19 +69,19 @@ sudo mkdir -p $CONF_DIR
 sudo mkdir -p $LOG_DIR
 
 # Git
-if ! type "git" > /dev/null; then
+if ! type "git" > /dev/null 2>&1; then
   sudo apt-get update
   sudo apt-get -y install git
 fi
 
 # Node
-if ! type "node" > /dev/null; then
+if ! type "node" > /dev/null 2>&1; then
   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
   sudo apt-get -y install nodejs
 fi
 
 # Caddy
-if ! type "caddy" > /dev/null; then
+if ! type "caddy" > /dev/null 2>&1; then
   curl https://getcaddy.com | bash -s personal http.cache
 fi
 
