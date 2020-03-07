@@ -12,6 +12,6 @@
     ["redirection", {}],
     ["encoding", {}],
     ["transforms", {}],
-    ["proxy", {}]
+    ["proxy", {"timeout": 60000}]
   ]
 }

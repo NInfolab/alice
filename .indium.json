@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "Start alice",
+      "type": "node",
+      "program": "node",
+      "args": "index.js config.json",
+      "inspect-brk": true
+    }
+  ]
+}
