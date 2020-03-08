@@ -1,13 +1,15 @@
 module.exports = (proxy, serverConfig, moduleConfig = {}) => {
-  // const timeout = moduleConfig.timeout || 60000 // 60s by default
+  const timeout = moduleConfig.timeout || 60000 // 60s by default
 
   proxy.on('proxyReq', (proxyReq, req, res, options) => {
-    // Commented out because of bug #80
-    //
-    // setTimeout(() => {
-    //   res.writeHead(521, { 'Content-Type': 'text/plain' })
-    //   res.end(`The target server didn't answer within ${timeout} milliseconds.`)
-    // }, timeout)
+    proxyReq.aliceTimeout = setTimeout(() => {
+      if (res.finished) {
+        return
+      }
+
+      res.writeHead(521, { 'Content-Type': 'text/plain' })
+      res.end(`The target server didn't answer within ${timeout} milliseconds.`)
+    }, timeout)
   })
 
   proxy.on('error', (err, req, res) => {

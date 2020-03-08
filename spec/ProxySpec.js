@@ -71,17 +71,77 @@ describe('alice\'s proxy', () => {
     expect(response.statusCode).toBe(521)
   })
 
-  // Commented out because of bug #80
-  // it('responds with 521 if target never answers', async () => {
-  //   const targetServer = await startTargetServer()
+  it('responds with 521 if target never answers', async () => {
+    const targetServer = await startTargetServer()
 
-  //   targetServer.on('request', (req, res) => {
-  //     // never answers
-  //   })
+    targetServer.on('request', (req, res) => {
+      // never answers
+    })
 
-  //   const proxy = await startProxy(`http://localhost:${targetServer.address().port}`)
-  //   const response = await get(proxy)
+    const proxy = await startProxy(
+      `http://localhost:${targetServer.address().port}`,
+      // minimize timeout to make the test run faster:
+      [['proxy', { timeout: 1 }]]
+    )
+    const response = await get(proxy)
 
-  //   expect(response.statusCode).toBe(521)
-  // })
+    expect(response.statusCode).toBe(521)
+  })
+
+  it('responds with the target response', async () => {
+    const targetServer = await startTargetServer()
+    const message = 'some response from the target'
+    const statusCode = 200
+    const contentType = 'text/plain'
+
+    targetServer.on('request', (req, res) => {
+      res.writeHead(statusCode, { 'Content-Type': contentType })
+      res.end(message)
+    })
+
+    const proxy = await startProxy(`http://localhost:${targetServer.address().port}`)
+    const response = await get(proxy)
+
+    expect(response.statusCode).toEqual(statusCode)
+    expect(response.headers['content-type']).toEqual(contentType)
+
+    return new Promise((resolve, reject) => {
+      response.on('data', (data) => {
+        expect(data.toString()).toEqual(message)
+        resolve()
+      })
+    })
+  })
+
+  it('doesn\'t crash after handling target response', async () => {
+    // This test makes sure that the code taking care of responding
+    // when the target never responds doesn't crash when the target responds
+
+    const targetServer = await startTargetServer()
+    const message = 'some response from the target'
+
+    targetServer.on('request', (req, res) => {
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end(message)
+    })
+
+    const proxy = await startProxy(
+      `http://localhost:${targetServer.address().port}`,
+      // the timeout should be large enough for the targetServer to answer
+      // first but still be smaller than Jasmine's own timeout
+      [['proxy', { timeout: jasmine.DEFAULT_TIMEOUT_INTERVAL / 10 }]]
+    )
+    const response = await get(proxy)
+
+    return new Promise((resolve, reject) => {
+      response.on('data', (data) => {
+        expect(data.toString()).toEqual(message)
+
+        // give the proxy's timeout the time to trigger:
+        setTimeout(() => {
+          resolve()
+        }, jasmine.DEFAULT_TIMEOUT_INTERVAL / 8)
+      })
+    })
+  })
 })
