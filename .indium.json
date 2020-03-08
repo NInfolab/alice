@@ -6,6 +6,13 @@
       "program": "node",
       "args": "index.js config.json",
       "inspect-brk": true
+    },
+    {
+      "name": "Start tests",
+      "type": "node",
+      "program": "node",
+      "args": "./node_modules/.bin/jasmine",
+      "inspect-brk": true
     }
   ]
 }
