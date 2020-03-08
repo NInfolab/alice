@@ -71,13 +71,6 @@ describe('alice\'s proxy', () => {
     expect(response.statusCode).toBe(521)
   })
 
-  it('responds with 521 if target doesn\'t exist', async () => {
-    const proxy = await startProxy('http://alice-le-clown-n-existe-pas.fr')
-    const response = await get(proxy)
-
-    expect(response.statusCode).toBe(521)
-  })
-
   // Commented out because of bug #80
   // it('responds with 521 if target never answers', async () => {
   //   const targetServer = await startTargetServer()
