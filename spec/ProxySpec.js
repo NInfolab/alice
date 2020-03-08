@@ -14,12 +14,12 @@ const startServer = (server) => {
 
 /**
  * Return a promise resolving when Alice is proxying to
- * `targetServer`. The promise is resolved with the proxy.
+ * `target`. The promise is resolved with the proxy.
  */
-const startProxy = (target) => {
+const startProxy = (target, modules = [['proxy', { timeout: 2000 }]]) => {
   const proxy = alice.createProxy({
     target,
-    modules: [['proxy', { timeout: 500 }]],
+    modules,
     'parsed_target': new URL(target)
   })
 
