@@ -40,11 +40,12 @@ module.exports = (proxy, serverConfig, moduleConfig = {}) => {
 
         if (charset && charset !== 'utf8') {
           if (iconv.encodingExists(charset)) {
-            processors.push(iconv.decodeStream(charset))
+            processors.unshift(iconv.decodeStream(charset))
           }
         }
 
         // Gunzip response if Gziped
+        // @TODO: condition will never be true, since we remove the request header 'accept-encoding'
         const contentEncoding = res.getHeader('content-encoding')
         if (contentEncoding && contentEncoding.toLowerCase() === 'gzip') {
           // Strip off the content encoding since it will change.
