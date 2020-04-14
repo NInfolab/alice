@@ -1,0 +1,43 @@
+version: 2
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - gh-pages-deploy:
+          # Run this job only on master
+          filters:
+            branches:
+              only: master
+
+jobs:
+  gh-pages-deploy:
+    # Docker image to use for this job
+    docker:
+      - image: starefossen/ruby-node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [ bundle-deps ]
+      - run:
+          name: Install dependencies
+          command: |
+            git config user.name "CircleCI"
+            git config user.email "circleci@-"
+
+            cd docs
+            bundle install --path vendor/bundle
+      - save_cache:
+          key: bundle-deps
+          paths:
+            - docs/vendor/bundle/
+      - add_ssh_keys:
+          fingerprints: [ "bd:07:5f:84:3b:0c:41:3d:7b:04:50:17:27:bf:7d:a0" ]
+      - run:
+          name: Build and deploy
+          command: |
+            cd docs
+            ./deploy.sh
+
+
+
