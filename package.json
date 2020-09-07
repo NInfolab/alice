@@ -27,7 +27,7 @@
   "dependencies": {
     "charset": "^1.0.0",
     "connect": "^3.4.1",
-    "http-proxy": "^1.13.1",
+    "http-proxy": "^1.18.1",
     "iconv-lite": "^0.4.13",
     "maxmind": "^2.11.2",
     "mkdirp": "^0.5.1",
